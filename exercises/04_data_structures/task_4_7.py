@@ -10,3 +10,13 @@
 """
 
 mac = "AAAA:BBBB:CCCC"
+abc = mac.split(':')
+a = int((abc[0]),16)
+b = int((abc[1]),16)
+c = int((abc[-1]),16)
+abc = (bin(a)+bin(b)+bin(c))
+abc = abc.split('0b')
+print(abc[1]+abc[2]+abc[-1])
+
+
+
