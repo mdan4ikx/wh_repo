@@ -38,7 +38,21 @@ def parse_cdp_neighbors(command_output):
     работать и с файлами и с выводом с оборудования.
     Плюс учимся работать с таким выводом.
     """
-
+    neighbors=[]
+    local=[]
+    Port=[]
+    slovar={}
+    for i in command_output.split('\n'):
+        #print(i)
+        if 'neighbors' in i:
+            local_host=i.split('>')[0]
+        elif i.startswith('R') or i.startswith('SW'):
+            neighbors.append([i.split()[0], i.split()[1]+i.split()[2], i.split()[-2]+i.split()[-1]])
+        else:
+            pass
+    for z in neighbors:
+        slovar[(local_host, z[1])] = (z[0], z[2])
+    print(slovar)
 
 if __name__ == "__main__":
     with open("sh_cdp_n_sw1.txt") as f:
