@@ -24,3 +24,24 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+a = input('Enter IP and MASC: ')
+b = a.split('/')
+mask = int(b[-1])
+ip = b[0]
+ip = ip.split('.')
+ip1, ip2, ip3, ip4 = int(ip[0]), int(ip[1]), int(ip[2]), int(ip[-1])
+
+mask0 =('1' * mask + ((32-mask)*'0'))
+mask1 = int(mask0[0:8], 2)
+mask2 = int(mask0[8:16], 2)
+mask3 = int(mask0[16:24], 2)
+mask4 = int(mask0[24:32], 2)
+print(f'''
+Network:
+{ip1:<8}  {ip2:<8}  {ip3:<8} {ip4:<8}
+{ip1:08b}  {ip2:08b}  {ip3:08b} {ip4:08b}
+
+Mask:
+/{mask}
+{mask1:<8} {mask2:<8} {mask3:<8} {mask4:<8}
+{mask1:08b} {mask2:08b} {mask3:08b} {mask4:08b}''')
