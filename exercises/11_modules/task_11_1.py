@@ -28,9 +28,21 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
-
+from pprint import pprint
 
 def parse_cdp_neighbors(command_output):
+    slovar={}
+    neighbors=[]
+    for i in command_output.split('\n'):
+        if 'neighbors' in i:
+            local_host=i.split('>')[0]
+        elif i.startswith('R') or i.startswith('SW'):
+            neighbors.append([i.split()[0], i.split()[1]+i.split()[2], i.split()[-2]+i.split()[-1]])
+        else:
+            pass
+    for z in neighbors:
+        slovar[(local_host, z[1])] = (z[0], z[2])
+    pprint(slovar)
     """
     Тут мы передаем вывод команды одной строкой потому что именно в таком виде
     будет получен вывод команды с оборудования. Принимая как аргумент вывод
